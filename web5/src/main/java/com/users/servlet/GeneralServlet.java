@@ -2,6 +2,7 @@ package com.users.servlet;
 
 import com.users.exception.DBException;
 import com.users.service.UserService;
+import com.users.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +17,10 @@ public class GeneralServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        UserService userService = null;
         try {
-            List userList = UserService.getUserService().getAllUser();
+            userService = UserServiceImpl.getInstance();
+            List userList = userService.getAllUser();
             req.setAttribute("userList", userList);
             getServletContext().getRequestDispatcher("/main.jsp").forward(req, resp);
         } catch (DBException e) {
@@ -26,5 +28,18 @@ public class GeneralServlet extends HttpServlet {
         }
     }
 
-
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String name = req.getParameter("name");
+        String surName = req.getParameter("surName");
+        UserService userService = null;
+        try {
+            userService = UserServiceImpl.getInstance();
+            userService.addUser(name, surName);
+            resp.sendRedirect(req.getContextPath() + "/main");
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
+    }
 }

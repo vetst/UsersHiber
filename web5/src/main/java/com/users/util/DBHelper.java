@@ -12,7 +12,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBHelper {
-    private static Connection connection;
+
     private static DBHelper INSTANCE;
     private static SessionFactory sessionFactory;
 
@@ -33,6 +33,7 @@ public class DBHelper {
         }
         return sessionFactory;
     }
+
     public Connection getMysqlConnection() {
         try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
@@ -52,7 +53,6 @@ public class DBHelper {
             throw new IllegalStateException();
         }
     }
-
 
     private static Configuration getMySqlConfiguration() {
         Configuration configuration = new Configuration();

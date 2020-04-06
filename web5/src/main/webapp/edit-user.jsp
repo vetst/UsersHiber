@@ -8,14 +8,11 @@
     <title>Title</title>
 </head>
 <body>
- <h2>Обновить пользователя</h2><br>
- <form action="edit" method="POST" >
- <input type="hidden" name="userId" value="${userId}">
- <p>Введите имя: <input type="text" value = "${name}" name = "name"></p>
- <p>Введите фамилию: <input type="text" value = "${surName}" name = "surName"></p>
- <input type ="submit" value ="Обновить" /></form>
-         <c:if test="${value != null}">
-      		<c:redirect url = "http://localhost:8080/web5/main"/>
-      	</c:if>
+<h2>Обновить пользователя</h2><br>
+<form action="edit" method="POST">
+    <input type="hidden" name="userId" value="${userId}">
+    <p><input type="text" value="${name}" name="name" placeholder="Имя" required></p>
+    <p><input type="text" value="${surName}" name="surName" placeholder="Фамилия" required></p>
+    <input type="submit" value="Обновить"/></form>
 </body>
 </html>

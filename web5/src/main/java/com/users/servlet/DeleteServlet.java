@@ -1,7 +1,7 @@
 package com.users.servlet;
 
-import com.users.model.User;
 import com.users.service.UserService;
+import com.users.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,24 +21,17 @@ public class DeleteServlet extends HttpServlet {
         req.setAttribute("message", message);
         getServletContext().getRequestDispatcher("/delete-user.jsp").forward(req, resp);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String someValue = req.getParameter("value");
+        UserService userService = null;
         try {
+            userService = UserServiceImpl.getInstance();
             Long id = Long.parseLong(userId);
-            int intSomeValue = 0;
-            if (someValue != null) {
-                intSomeValue = Integer.parseInt(someValue);
-            }
-            if (id != 0 && intSomeValue == 1) {
-                User user = new User();
-                user.setId(id);
-                UserService.getUserService().deleteUser(user);
-                req.setAttribute("userIdRedirect", userId);
-            }
+            userService.deleteUser(id);
+            resp.sendRedirect(req.getContextPath() + "/main");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        getServletContext().getRequestDispatcher("/delete-user.jsp").forward(req, resp);
     }
 }

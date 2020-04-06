@@ -1,8 +1,8 @@
 package com.users.servlet;
 
 import com.users.exception.DBException;
-import com.users.model.User;
 import com.users.service.UserService;
+import com.users.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +14,7 @@ import java.io.IOException;
 @WebServlet("/edit")
 public class EditServlet extends HttpServlet {
     private String userId;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         userId = req.getParameter("userId");
@@ -24,24 +25,17 @@ public class EditServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
-        String value = null;
-        req.setAttribute("value", value);
         String name = req.getParameter("name");
         String surName = req.getParameter("surName");
+        UserService userService = null;
         try {
-            if ((!"".equals(name) && !"".equals(surName)) && (name != null && surName != null)) {
-                Long id = Long.parseLong(userId);
-                User user = new User();
-                user.setId(id);
-                user.setName(name);
-                user.setSurName(surName);
-                UserService.getUserService().updateUser(user);
-                value = "not null";
-                req.setAttribute("value", value);
-            }
+            userService = UserServiceImpl.getInstance();
+            Long id = Long.parseLong(userId);
+            userService.updateUser(id, name, surName);
+            resp.sendRedirect(req.getContextPath() + "/main");
         } catch (DBException e) {
             e.printStackTrace();
         }
-        getServletContext().getRequestDispatcher("/edit-user.jsp").forward(req, resp);
+
     }
 }
