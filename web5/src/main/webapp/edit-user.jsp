@@ -11,8 +11,8 @@
 <h2>Обновить пользователя</h2><br>
 <form action="edit" method="POST">
     <input type="hidden" name="userId" value="${userId}">
-    <p><input type="text" value="${name}" name="name" placeholder="Имя" required></p>
-    <p><input type="text" value="${surName}" name="surName" placeholder="Фамилия" required></p>
+    <p><input type="text" value="${name}" name="name" placeholder="${name}" required></p>
+    <p><input type="text" value="${surName}" name="surName" placeholder="${surName}" required></p>
     <input type="submit" value="Обновить"/></form>
 </body>
 </html>

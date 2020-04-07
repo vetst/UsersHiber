@@ -17,16 +17,22 @@ public class EditServlet extends HttpServlet {
     UserService userService = null;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("utf-8");
-        String userId = null;
-        userId = req.getParameter("userId");
-        req.setAttribute("userId", userId);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userId = req.getParameter("userId");
         String name = req.getParameter("name");
         String surName = req.getParameter("surName");
-        if (name == null && surName == null) {
-            getServletContext().getRequestDispatcher("/edit-user.jsp").forward(req, resp);
-        }
+        req.setAttribute("userId", userId);
+        req.setAttribute("name", name);
+        req.setAttribute("surName", surName);
+        getServletContext().getRequestDispatcher("/edit-user.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        String userId = req.getParameter("userId");
+        String name = req.getParameter("name");
+        String surName = req.getParameter("surName");
         try {
             userService = UserServiceImpl.getInstance();
             Long id = Long.parseLong(userId);

@@ -10,12 +10,19 @@
 <h2>Список пользователей</h2>
 
 <table border="1" cellpadding="5" cellspacing="5">
+    <tr>
+        <td><b>NAME</b></td>
+        <td><b>EDIT</b></td>
+        <td><b>DELETE</b></td>
+    </tr>
     <c:forEach var="user" items="${userList}">
         <tr>
             <td>${user.name} ${user.surName}</td>
             <td>
-                <form action="edit" method="POST">
+                <form action="edit" method="GET">
                     <input type="hidden" name="userId" value="${user.id}">
+                    <input type="hidden" name="name" value="${user.name}">
+                    <input type="hidden" name="surName" value="${user.surName}">
                     <input type="submit" value="Редактировать"/>
                 </form>
             </td>
