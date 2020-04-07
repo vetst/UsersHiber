@@ -14,8 +14,6 @@ import java.io.IOException;
 @WebServlet("/edit")
 public class EditServlet extends HttpServlet {
 
-    UserService userService = null;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
@@ -34,7 +32,7 @@ public class EditServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surName = req.getParameter("surName");
         try {
-            userService = UserServiceImpl.getInstance();
+            UserService userService = UserServiceImpl.getInstance();
             Long id = Long.parseLong(userId);
             userService.updateUser(id, name, surName);
             resp.sendRedirect(req.getContextPath() + "/main");

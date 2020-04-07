@@ -11,13 +11,17 @@
 
 <table border="1" cellpadding="5" cellspacing="5">
     <tr>
-        <td><b>NAME</b></td>
-        <td><b>EDIT</b></td>
-        <td><b>DELETE</b></td>
+        <td><b>Id</b></td>
+        <td><b>Name</b></td>
+        <td><b>Surname</b></td>
+        <td><b>Edit</b></td>
+        <td><b>Delete</b></td>
     </tr>
     <c:forEach var="user" items="${userList}">
         <tr>
-            <td>${user.name} ${user.surName}</td>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.surName}</td>
             <td>
                 <form action="edit" method="GET">
                     <input type="hidden" name="userId" value="${user.id}">
