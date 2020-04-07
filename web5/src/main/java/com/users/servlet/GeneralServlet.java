@@ -15,6 +15,8 @@ import java.util.List;
 @WebServlet("/main")
 public class GeneralServlet extends HttpServlet {
 
+    UserService userService = null;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserService userService = null;
@@ -33,7 +35,7 @@ public class GeneralServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         String name = req.getParameter("name");
         String surName = req.getParameter("surName");
-        UserService userService = null;
+
         try {
             userService = UserServiceImpl.getInstance();
             userService.addUser(name, surName);

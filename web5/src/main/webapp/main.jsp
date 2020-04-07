@@ -14,13 +14,13 @@
         <tr>
             <td>${user.name} ${user.surName}</td>
             <td>
-                <form action="edit" method="GET">
+                <form action="edit" method="POST">
                     <input type="hidden" name="userId" value="${user.id}">
                     <input type="submit" value="Редактировать"/>
                 </form>
             </td>
             <td>
-                <form action="delete" method="GET">
+                <form action="delete" method="POST">
                     <input type="hidden" name="userId" value="${user.id}">
                     <input type="submit" value="Удалить"/>
                 </form>

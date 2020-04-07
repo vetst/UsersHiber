@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateUser(Long id, String name, String surName) throws DBException {
         try {
-            if (id != null) {
+            if (id != null && name != null && surName != null) {
                 User user = new User();
                 user.setId(id);
                 user.setName(name);

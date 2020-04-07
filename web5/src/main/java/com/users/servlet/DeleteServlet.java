@@ -12,19 +12,13 @@ import java.io.IOException;
 
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
-    private String userId = null;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userId = req.getParameter("userId");
-        String message = "Вы действительно хотите удалить пользователя ?";
-        req.setAttribute("message", message);
-        getServletContext().getRequestDispatcher("/delete-user.jsp").forward(req, resp);
-    }
+    UserService userService = null;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = null;
+        String userId = null;
+        userId = req.getParameter("userId");
         try {
             userService = UserServiceImpl.getInstance();
             Long id = Long.parseLong(userId);

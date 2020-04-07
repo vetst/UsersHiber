@@ -1,5 +1,4 @@
 package com.users.model;
-
 import javax.persistence.*;
 
 @Entity
@@ -55,6 +54,4 @@ public class User {
     public void setSurName(String surName) {
         this.surName = surName;
     }
-
-
 }

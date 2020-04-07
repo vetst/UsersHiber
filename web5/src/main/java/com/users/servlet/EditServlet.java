@@ -13,21 +13,20 @@ import java.io.IOException;
 
 @WebServlet("/edit")
 public class EditServlet extends HttpServlet {
-    private String userId;
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userId = req.getParameter("userId");
-        req.setAttribute("userId", userId);
-        getServletContext().getRequestDispatcher("/edit-user.jsp").forward(req, resp);
-    }
+    UserService userService = null;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
+        String userId = null;
+        userId = req.getParameter("userId");
+        req.setAttribute("userId", userId);
         String name = req.getParameter("name");
         String surName = req.getParameter("surName");
-        UserService userService = null;
+        if (name == null && surName == null) {
+            getServletContext().getRequestDispatcher("/edit-user.jsp").forward(req, resp);
+        }
         try {
             userService = UserServiceImpl.getInstance();
             Long id = Long.parseLong(userId);
@@ -36,6 +35,5 @@ public class EditServlet extends HttpServlet {
         } catch (DBException e) {
             e.printStackTrace();
         }
-
     }
 }
