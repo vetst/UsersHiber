@@ -3,7 +3,6 @@ package com.users.dao;
 import com.users.exception.DBException;
 import com.users.model.User;
 import com.users.util.DBHelper;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

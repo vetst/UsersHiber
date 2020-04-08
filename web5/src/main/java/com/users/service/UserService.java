@@ -10,7 +10,7 @@ public interface UserService {
 
     public boolean updateUser(Long id, String name, String surName) throws DBException;
 
-    public boolean deleteUser(Long id);
+    public boolean deleteUser(Long id) throws DBException;
 
     public List<User> getAllUser() throws DBException;
 }

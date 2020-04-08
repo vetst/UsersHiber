@@ -4,7 +4,6 @@ import com.users.exception.DBException;
 import com.users.model.User;
 import com.users.util.DBHelper;
 import org.hibernate.*;
-
 import java.sql.SQLException;
 import java.util.List;
 

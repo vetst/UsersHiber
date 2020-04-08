@@ -15,9 +15,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public static UserServiceImpl getInstance() throws DBException {
+    public static UserServiceImpl getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new UserServiceImpl();
+            try {
+                INSTANCE = new UserServiceImpl();
+            } catch (DBException e) {
+                e.printStackTrace();
+            }
         }
         return INSTANCE;
     }
@@ -52,7 +56,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public boolean deleteUser(Long id) {
+    public boolean deleteUser(Long id) throws DBException {
         try {
             if (id != null) {
                 User user = new User();

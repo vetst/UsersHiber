@@ -15,10 +15,11 @@ import java.util.List;
 @WebServlet("/main")
 public class GeneralServlet extends HttpServlet {
 
+    private UserService userService = UserServiceImpl.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            UserService userService = UserServiceImpl.getInstance();
             List userList = userService.getAllUser();
             req.setAttribute("userList", userList);
             getServletContext().getRequestDispatcher("/main.jsp").forward(req, resp);
@@ -33,7 +34,6 @@ public class GeneralServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surName = req.getParameter("surName");
         try {
-            UserService userService = UserServiceImpl.getInstance();
             userService.addUser(name, surName);
             resp.sendRedirect(req.getContextPath() + "/main");
         } catch (DBException e) {

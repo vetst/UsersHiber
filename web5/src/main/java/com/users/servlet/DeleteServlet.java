@@ -13,11 +13,12 @@ import java.io.IOException;
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
 
+    private UserService userService = UserServiceImpl.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         try {
-            UserService userService = UserServiceImpl.getInstance();
             Long id = Long.parseLong(userId);
             userService.deleteUser(id);
             resp.sendRedirect(req.getContextPath() + "/main");
